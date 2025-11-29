@@ -39,3 +39,13 @@
 
 # debug information files
 *.dwo
+
+# compiler directories
+./bin
+
+# log files
+*.log
+
+# mac filesystem files
+#./.ds_store
+#./.DS_Store
