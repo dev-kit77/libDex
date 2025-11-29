@@ -1,0 +1,23 @@
+// Project tasks configuration. See https://zed.dev/docs/tasks for documentation.
+[
+  {
+    "label": "libDex: Run System",
+    "command": "g++ ./lib/*.cpp ./src/*.cpp ./src/data/*.cpp -o ./bin/libdex.out -I./lib -I./src -I./src/data && ./bin/libdex.out",
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+
+  {
+    "label": "libDex: Compile System",
+    "command": "g++ ./lib/*.cpp ./src/*.cpp ./src/data/*.cpp -o ./bin/libdex.out -I./lib -I./src -I./src/data",
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+
+  {
+    "label": "libDex: RunInterface Tests",
+    "command": "g++ ./lib/interface.cpp ./tests/iftest.cpp -o ./bin/interfaceTests.out -I./lib && ./bin/interfaceTests.out",
+    "use_new_terminal": false,
+    "reveal": "always"
+  }
+]
