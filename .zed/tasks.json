@@ -15,8 +15,15 @@
   },
 
   {
-    "label": "libDex: RunInterface Tests",
-    "command": "g++ ./lib/interface.cpp ./tests/iftest.cpp -o ./bin/interfaceTests.out -I./lib && ./bin/interfaceTests.out",
+    "label": "libDex: Compile Interface Tests",
+    "command": "g++ ./lib/interface.cpp ./tests/iftest.cpp -o ./bin/interfaceTests.out -I./lib",
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+
+  {
+    "label": "libDex: Compile Library Tests",
+    "command": "g++ ./lib/interface.cpp ./src/*.cpp ./src/data/*.cpp ./tests/libtest.cpp -o ./bin/libraryTests.out -I./lib -I./src -I./src/data",
     "use_new_terminal": false,
     "reveal": "always"
   }
