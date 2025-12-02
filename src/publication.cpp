@@ -49,3 +49,23 @@
         //return status code
         return ELEMENT_NOT_FOUND;
     }
+
+    int Publication::operator>(const Publication& publication) {
+        //compare titles
+        return this->title.compare(publication.title) > 0;
+    }
+
+    int Publication::operator<(const Publication& publication) {
+        //compare titles
+        return this->title.compare(publication.title) < 0;
+    }
+
+    int Publication::operator>(const std::string s) {
+        //compare strings
+        return this->title.compare(s) > 0;
+    }
+
+    int Publication::operator<(const std::string s) {
+        //compare strings
+        return this->title.compare(s) < 0;
+    }

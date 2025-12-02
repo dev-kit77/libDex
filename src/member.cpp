@@ -6,6 +6,7 @@
 
 //standard library includes
 #include <cstddef>
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -160,6 +161,34 @@ std::string Member::toString() {
     return result;
 }
 
+int Member::operator<(Member& member) {
+    //compare names
+    return this->name.compare(member.name) < 0;
+}
+
+int Member::operator>(Member& member) {
+    //compare names
+    return this->name.compare(member.name) > 0;
+}
+
+int Member::operator<(std::string s) {
+    //compare strings
+    return this->name.compare(s) < 0;
+}
+
+int Member::operator>(std::string s) {
+    //compare strings
+    return this->name.compare(s) > 0;
+}
+
 Member::~Member() {
     this->clearLoans();
+}
+
+std::ostream& operator<<(std::ostream& os, Member& member) {
+    //add member toString to output stream
+    os << member.toString();
+
+    //return output stream
+    return os;
 }

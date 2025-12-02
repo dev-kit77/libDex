@@ -36,7 +36,7 @@ class Member {
         /**
          * Destructor for Member class.
          */
-        virtual ~Member();
+        ~Member();
 
         /**
          * Getter for Member ID.
@@ -117,6 +117,56 @@ class Member {
          * @return A representation of this Member object, as string.
          */
         std::string toString();
+
+        /**
+         * Operator overload to compare two Members lexographically by name.
+         *
+         * @param member The Member to compare with.
+         * @return 1 if this Member's name is first alphabetically, 0 otherwise.
+         */
+        int operator<(Member& member);
+
+        /**
+         * Operator overload to compare a Member's name with a string lexographically.
+         *
+         * @param s The string to compare with.
+         * @return 1 if this Member's name is first alphabetically, 0 otherwise.
+         */
+        int operator<(std::string s);
+
+        /**
+         * Operator overload to compare two Members lexographically by name.
+         *
+         * @param member The Member to compare with.
+         * @return 1 if this Member's name is last alphabetically, 0 otherwise.
+         */
+        int operator>(Member& member);
+
+        /**
+         * Operator overload to compare a Member's name with a string lexographically.
+         *
+         * @param s The string to compare with.
+         * @return 1 if this Member's name is last alphabetically, 0 otherwise.
+         */
+        int operator>(std::string s);
+
+        /**
+         * Operator overload to output a Member object to an output stream.
+         *
+         * @param os The output stream to write to.
+         * @param member The Member object to output.
+         * @return The output stream.
+         */
+        friend std::ostream& operator<<(std::ostream& os, const Member& member);
+
+        /**
+         * Operator overload to input to a Member object from an input stream.
+         *
+         * @param is The input stream to read from.
+         * @param member The Member object to input to.
+         * @return The input stream.
+         */
+        friend std::istream& operator>>(std::istream& is, Member& member);
 
     private:
         std::string id;
