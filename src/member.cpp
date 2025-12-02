@@ -1,7 +1,7 @@
 //required header files
 #include "member.h"
 #include "loan.h"
-#include "def.h"
+#include "codes.h"
 #include "publication.h"
 
 //standard library includes

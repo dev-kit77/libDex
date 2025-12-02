@@ -3,6 +3,11 @@
 
 #include <ctime>
 
+//Loan Related Constants
+#define CURRENT_TIME std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())
+#define LOAN_DURATION (30*60*60*24)
+#define BOOK_RATE 0.000025 //fraction of penny to be added per overdue second = £2.16 per day
+
 class Member;
 class Publication;
 
