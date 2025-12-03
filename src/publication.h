@@ -20,12 +20,12 @@ class Publication {
         /**
          * Getter for id class field
          */
-        std::string getID();
+        std::string getID() const;
 
         /**
          * Getter for title class field
          */
-        std::string getTitle();
+        std::string getTitle() const;
 
         /**
          * Getter for loans class field
@@ -35,7 +35,7 @@ class Publication {
         /**
          * Getter for copies class field
          */
-        int getCopies();
+        int getCopies() const;
 
         /**
          * Method to add a loan to the publication
@@ -53,7 +53,7 @@ class Publication {
          * @param publication The Publication to compare with.
          * @return 1 if this Publication's title is first alphabetically, 0 otherwise.
          */
-        int operator<(const Publication& publication);
+        int operator<(const Publication& publication) const;
 
         /**
          * Operator overload to compare compare a Publication with a string lexographically by title.
@@ -61,7 +61,7 @@ class Publication {
          * @param s The string to compare with.
          * @return 1 if this Publication's title is first alphabetically, 0 otherwise.
          */
-        int operator<(const std::string s);
+        int operator<(const std::string s) const;
 
         /**
          * Operator overload to compare two publications lexographically by title.
@@ -69,7 +69,7 @@ class Publication {
          * @param publication The Publication to compare with.
          * @return 1 if this Publication's title is last alphabetically, 0 otherwise.
          */
-        int operator>(const Publication& publication);
+        int operator>(const Publication& publication) const;
 
         /**
          * Operator overload to compare a Publication with a string lexographically by title.
@@ -77,7 +77,7 @@ class Publication {
          * @param s The string to compare with.
          * @return 1 if this Publication's title is last alphabetically, 0 otherwise.
          */
-        int operator>(const std::string s);
+        int operator>(const std::string s) const;
 
         /**
          * Operator overload to output a Publication to an output stream.
@@ -98,14 +98,22 @@ class Publication {
         friend std::istream& operator>>(std::istream& is, Publication& publication);
 
         /**
+         * Operator overload to compare two Publications lexographically by title.
+         *
+         * @param publication The Publication to compare with.
+         * @return 1 if the Publications titles are the same, 0 otherwise.
+         */
+        friend int operator==(Publication& p1, Publication& p2);
+
+        /**
          * toString method to return a string representation of the publication. Pure virtual method to be implemented by subclasses.
          */
-        virtual std::string toString() = 0;
+        const virtual std::string toString() = 0;
 
         /**
          * getType method to return the type of the publication. Pure virtual method to be implemented by subclasses.
          */
-        virtual std::string getType() = 0;
+        const virtual std::string getType() = 0;
 
     protected:
         //class fields

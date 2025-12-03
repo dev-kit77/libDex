@@ -32,13 +32,6 @@ class Member {
         Member(const std::string& id, const std::string& name);
 
         /**
-         * Destructor for Member class.
-         *
-         * Frees all loans and the vector.
-         */
-        ~Member();
-
-        /**
          * Getter for Member ID.
          *
          * @return The Member's ID, as string.
@@ -116,7 +109,7 @@ class Member {
          *
          * @return A representation of this Member object, as string.
          */
-        std::string toString();
+        std::string toString() const;
 
         /**
          * Operator overload to compare two Members lexographically by name.
@@ -132,7 +125,7 @@ class Member {
          * @param s The string to compare with.
          * @return 1 if this Member's name is first alphabetically, 0 otherwise.
          */
-        int operator<(std::string s);
+        int operator<(const std::string& s);
 
         /**
          * Operator overload to compare two Members lexographically by name.
@@ -140,7 +133,7 @@ class Member {
          * @param member The Member to compare with.
          * @return 1 if this Member's name is last alphabetically, 0 otherwise.
          */
-        int operator>(const Member& member);
+        int operator>(Member& member);
 
         /**
          * Operator overload to compare a Member's name with a string lexographically.

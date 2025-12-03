@@ -26,11 +26,6 @@ class Loan {
         Loan(Member* member, Publication* publication);
 
         /**
-        * Destructor for Loan class. Deletes the loan object.
-        */
-        ~Loan();
-
-        /**
          * Getter for the member who borrowed the publication.
          * @return Pointer to the member who borrowed the publication.
          */

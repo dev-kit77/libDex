@@ -4,11 +4,11 @@
 #include <string>
 #include <vector>
 
-    std::string Publication::getID() {
+    std::string Publication::getID() const {
         return this->id;
     }
 
-    std::string Publication::getTitle() {
+    std::string Publication::getTitle() const {
         return this->title;
     }
 
@@ -16,7 +16,7 @@
         return &this->loans;
     }
 
-    int Publication::getCopies() {
+    int Publication::getCopies() const {
         return this->copies;
     }
 
@@ -50,22 +50,27 @@
         return ELEMENT_NOT_FOUND;
     }
 
-    int Publication::operator>(const Publication& publication) {
+    int Publication::operator>(const Publication& publication) const {
         //compare titles
         return this->title.compare(publication.title) > 0;
     }
 
-    int Publication::operator<(const Publication& publication) {
+    int Publication::operator<(const Publication& publication) const {
         //compare titles
         return this->title.compare(publication.title) < 0;
     }
 
-    int Publication::operator>(const std::string s) {
+    int Publication::operator>(const std::string s) const {
         //compare strings
         return this->title.compare(s) > 0;
     }
 
-    int Publication::operator<(const std::string s) {
+    int Publication::operator<(const std::string s) const {
         //compare strings
         return this->title.compare(s) < 0;
+    }
+
+    int operator==(Publication& p1, Publication& p2) {
+        //compare titles
+        return (p1.title.compare(p2.title) == 0 && p1.getType() == p2.getType());
     }
