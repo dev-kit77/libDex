@@ -8,7 +8,8 @@
     "build": "libDex: Compile System",
     "program": "$ZED_WORKTREE_ROOT/bin/libdex.out",
     "request": "launch",
-    "adapter": "CodeLLDB"
+    "adapter": "CodeLLDB",
+    "cwd": "$ZED_WORKTREE_ROOT"
   },
 
   {
@@ -16,7 +17,8 @@
     "command": "libdex: Compile Interface Tests",
     "program": "./bin/interfaceTests.out",
     "request": "launch",
-    "adapter": "CodeLLDB"
+    "adapter": "CodeLLDB",
+    "cwd": "$ZED_WORKTREE_ROOT"
   },
 
   {
@@ -24,6 +26,16 @@
     "command": "libdex: Compile Library Tests",
     "program": "./bin/libTests.out",
     "request": "launch",
-    "adapter": "CodeLLDB"
+    "adapter": "CodeLLDB",
+    "cwd": "$ZED_WORKTREE_ROOT"
+  },
+
+  {
+    "label": "libDex: Debug List Tests",
+    "command": "libdex: Compile List Tests",
+    "program": "./bin/listTests.out",
+    "request": "launch",
+    "adapter": "CodeLLDB",
+    "cwd": "$ZED_WORKTREE_ROOT"
   }
 ]

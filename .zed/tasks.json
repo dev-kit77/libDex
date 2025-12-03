@@ -9,21 +9,28 @@
 
   {
     "label": "libDex: Compile System",
-    "command": "g++ ./lib/*.cpp ./src/*.cpp ./src/data/*.cpp -o ./bin/libdex.out -I./lib -I./src -I./src/data",
+    "command": "g++ -g ./lib/*.cpp ./src/*.cpp ./src/data/*.cpp -o ./bin/libdex.out -I./lib -I./src -I./src/data",
     "use_new_terminal": false,
     "reveal": "always"
   },
 
   {
     "label": "libDex: Compile Interface Tests",
-    "command": "g++ ./lib/interface.cpp ./tests/iftest.cpp -o ./bin/interfaceTests.out -I./lib",
+    "command": "g++ -g ./lib/interface.cpp ./tests/iftest.cpp -o ./bin/interfaceTests.out -I./lib",
     "use_new_terminal": false,
     "reveal": "always"
   },
 
   {
     "label": "libDex: Compile Library Tests",
-    "command": "g++ ./lib/interface.cpp ./src/*.cpp ./src/data/*.cpp ./tests/libtest.cpp -o ./bin/libraryTests.out -I./lib -I./src -I./src/data",
+    "command": "g++ -g ./lib/interface.cpp ./src/*.cpp ./src/data/*.cpp ./tests/libtest.cpp -o ./bin/libraryTests.out -I./lib -I./src -I./src/data",
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+
+  {
+    "label": "libDex: Compile List Tests",
+    "command": "g++ -g ./lib/interface.cpp ./src/*.cpp ./tests/listTest.cpp -o ./bin/listTests.out -I./lib -I./src -I./src/data",
     "use_new_terminal": false,
     "reveal": "always"
   }
