@@ -18,8 +18,6 @@ Member::Member() {
     this->id = "";
     this->name = "";
 
-    std::cout << "Member created" << std::endl;
-
     //init empty loan vector
     this->loans = new std::vector<Loan*>();
 }
@@ -166,18 +164,21 @@ int Member::clearLoans() {
 
 std::string Member::toString() const {
     //init result string and add Member ID and name
-    std::string result = this->id + " " + this->name + " ";
+    std::stringstream* ss = new std::stringstream();
+
+    //add Member ID and name to result string
+    *ss << this->id << " " << this->name << " ";
 
     //loop for all loans
     for (Loan* l : *this->loans) {
         if (l->getPublication() != nullptr) {
             //add current loan ID to result string
-            result += l->getPublication()->getID() + " ";
+            *ss << l->getPublication()->getID() << " ";
         }
     }
 
     //return completed string representation of Member
-    return result;
+    return ss->str();
 }
 
 int Member::operator<(Member& member) {
