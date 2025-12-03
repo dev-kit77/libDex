@@ -41,7 +41,7 @@
 *.dwo
 
 # compiler directories
-./bin
+./bin/*
 
 # log files
 *.log
@@ -49,3 +49,4 @@
 # mac filesystem files
 .ds_store
 .DS_Store
+
