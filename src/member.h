@@ -1,11 +1,13 @@
 #ifndef MEMBER_H
 #define MEMBER_H
 
-#include "publication.h"
+//standard library includes
 #include <string>
 #include <vector>
 
+//forward declarations
 class Loan;
+class Publication;
 
 /**
  * Member Class for libDex.
@@ -17,7 +19,12 @@ class Loan;
 class Member {
     public:
         /**
-         * Default Constructor for Member class.
+        * Default constructor for Member class.
+        */
+        Member();
+
+        /**
+         * Constructor for Member class.
          *
          * @param id The Member's ID, as string.
          * @param name The Member's name, as string.
@@ -25,16 +32,9 @@ class Member {
         Member(const std::string& id, const std::string& name);
 
         /**
-         * Constructor for Member class with loan information.
-         *
-         * @param id The Member's ID, as string.
-         * @param name The Member's name, as string.
-         * @param loans The Member's loans, as vector of strings.
-         */
-        Member(const std::string& id, const std::string& name, const std::vector<Loan*>& loans);
-
-        /**
          * Destructor for Member class.
+         *
+         * Frees all loans and the vector.
          */
         ~Member();
 
@@ -140,7 +140,7 @@ class Member {
          * @param member The Member to compare with.
          * @return 1 if this Member's name is last alphabetically, 0 otherwise.
          */
-        int operator>(Member& member);
+        int operator>(const Member& member);
 
         /**
          * Operator overload to compare a Member's name with a string lexographically.
@@ -148,7 +148,15 @@ class Member {
          * @param s The string to compare with.
          * @return 1 if this Member's name is last alphabetically, 0 otherwise.
          */
-        int operator>(std::string s);
+        int operator>(const std::string& s);
+
+        /**
+         * Operator overload to compare two Members lexographically by name.
+         *
+         * @param member The Member to compare with.
+         * @return 1 if this Member's name is same, 0 otherwise.
+         */
+        friend int operator==(const Member& m1, const Member& m2);
 
         /**
          * Operator overload to output a Member object to an output stream.
@@ -171,7 +179,7 @@ class Member {
     private:
         std::string id;
         std::string name;
-        std::vector<Loan*> loans;
+        std::vector<Loan*>* loans;
 };
 
 #endif

@@ -41,7 +41,7 @@
 *.dwo
 
 # compiler directories
-./bin/*
+./bin/
 
 # log files
 *.log
