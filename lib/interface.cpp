@@ -7,7 +7,6 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
-#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -38,9 +37,6 @@ void printTXT(const string &filename) {
       cerr << "Detailed Err: " << errno << ": " << strerror(errno) << "."
            << endl;
     }
-
-    // throw exception
-    throw runtime_error("File cannot be opened.");
   }
 
   // init line string

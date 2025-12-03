@@ -4,71 +4,69 @@
 #include <iostream>
 #include <string>
 
-using namespace interface;
-
 int main() {
     //test txt print
-    printTXT("libdex.txt");
+    interface::printTXT("./res/libdex.txt");
 
     //test separator
-    separator();
+    interface::separator();
 
     //test message print
-    printMessage("Welcome to the Interface Test!");
+    interface::printMessage("Welcome to the Interface Test!");
 
     //test newLine
-    newLine();
+    interface::newLine();
 
     //test int reading with no given bounds
-    int returnInt = getInt("Please enter an integer");
+    int returnInt = interface::getInt("Please enter an integer");
 
     //print return value
     cout << "Return Value: " << returnInt << endl;
 
     //test int reading with lower bound
-    returnInt = getInt("Please enter an integer > 0", 0);
+    returnInt = interface::getInt("Please enter an integer > 0", 0);
 
     //print return value
     cout << "Return Value: " << returnInt << endl;
 
     //test int reading with upper bound
-    returnInt = getInt("Please enter an integer < 0", INT_MIN, 0);
+    returnInt = interface::getInt("Please enter an integer < 0", INT_MIN, 0);
 
     //print return value
     cout << "Return Value: " << returnInt << endl;
 
     //test double reading with no given bounds
-    double returnDbl = getDouble("Please enter a double");
+    double returnDbl = interface::getDouble("Please enter a double");
 
     //print return value
     cout << "Return Value: " << returnDbl << endl;
 
     //test double reading with lower bound
-    returnDbl = getDouble("Please enter a double > 0", 0.0);
+    returnDbl = interface::getDouble("Please enter a double > 0", 0.0);
 
     //print return value
     cout << "Return Value: " << returnDbl << endl;
 
     //test double reading with upper bound
-    returnDbl = getDouble("Please enter a double < 0", -DBL_MAX, 0.0);
+    returnDbl = interface::getDouble("Please enter a double < 0", -DBL_MAX, 0.0);
 
     //print return value
     cout << "Return Value: " << returnDbl << endl;
 
     //test string reading with no given bounds
-    string stringRet = getString("Please enter a String");
+    string stringRet = interface::getString("Please enter a String");
 
     //print result
     cout << "Return Value: " <<stringRet << endl;
 
     //test string reading with set length
-    stringRet = getString("Please enter a String < 10 Characters", 10);
+    stringRet = interface::getString("Please enter a String < 10 Characters", 10);
 
     //print result
     cout << "Return Value: " << stringRet << endl;
 
     //test menu
-    int returnVal = menu({"this", "that", "the other"});
+    int returnVal = interface::menu({"this", "that", "the other"});
 
     //print return value
     cout << "Return Value: " << returnVal << endl;
