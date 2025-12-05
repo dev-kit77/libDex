@@ -19,11 +19,11 @@ class Journal : public Publication {
          * @param publisher publisher of the Journal
          * @param location location of the Journal
          * @param year year of publication of the Journal
-         * @param pages number of pages in the Journal
+         * @param pageNo page number of the Journal
          * @param category category of the Journal
          * @param avalability number of copies available for the Journal
          */
-        Journal(const std::string id, const std::string& title, const std::string& author, const int volume, const std::string& publisher, const std::string& location, const int year, const int pages, const std::string& category, const int avalability);
+        Journal(const std::string id, const std::string& title, const std::string& author, const int volume, const std::string& publisher, const std::string& location, const int year, const int pageNo, const std::string& category, const int avalability);
 
         /**
          * Getter for author class field
@@ -35,7 +35,7 @@ class Journal : public Publication {
          * Getter for volume class field
          * @return volume of the Journal, as string
          */
-        std::string getVolume() const;
+        int getVolume() const;
 
         /**
          * Getter for page count class field

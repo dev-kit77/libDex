@@ -44,30 +44,30 @@ std::string Book::getType() const {
     return "book";
 }
 
-std::ostream& operator<<(std::ostream& os, const Book& book) {
+std::ostream& operator<<(std::ostream& os, const Book& b) {
     //add toString to output stream
-    os << book.toString();
+    os << b.toString();
 
     //return output stream
     return os;
 }
 
-std::istream& operator>>(std::istream& is, Book& book) {
+std::istream& operator>>(std::istream& is, Book& b) {
     //get id from input stream
-    is >> book.id;
+    is >> b.id;
 
     //get title from input stream
-    book.title = util::parseStringInput(is);
+    b.title = util::parseStringInput(is);
 
     //get author from input stream
-    book.author = util::parseStringInput(is);
+    b.author = util::parseStringInput(is);
 
     //get genre from input stream
-    book.genre = util::parseStringInput(is);
+    b.genre = util::parseStringInput(is);
 
     //get page count from input stream
     if (is.peek() != '\n' && is.peek() != EOF) {
-        is >> book.pageCount;
+        is >> b.pageCount;
     }
     else {
         is.ignore();
@@ -75,7 +75,7 @@ std::istream& operator>>(std::istream& is, Book& book) {
 
     //get copies from input stream
     if (is.peek() != '\n' && is.peek() != EOF) {
-        is >> book.available;
+        is >> b.available;
     }
     else {
         if (!is.eof()) {
