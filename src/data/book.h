@@ -57,7 +57,7 @@ class Book : public Publication {
          * @param book book object to output
          * @return output stream
          */
-        friend std::ostream& operator<<(std::ostream& os, const Book& book);
+        friend std::ostream& operator<<(std::ostream& os, const Book& b);
 
         /**
          * Operator overload to input book object from istream
@@ -65,7 +65,7 @@ class Book : public Publication {
          * @param book book object to input
          * @return input stream
          */
-        friend std::istream& operator>>(std::istream& is, Book& book);
+        friend std::istream& operator>>(std::istream& is, Book& b);
 
         //include publication comparison
         friend int operator==(const Publication& p1, const Publication& p2);
