@@ -27,6 +27,13 @@ class Loan {
         Loan(Member* member, Publication* publication);
 
         /**
+        * Constructor for Loan class. Creates a new loan with the given member, publication and due date.
+        * @param member Pointer to the member who borrowed the publication.
+        * @param publication Pointer to the publication that was borrowed.
+        */
+        Loan(Member* member, Publication* publication, time_t due);
+
+        /**
          * Getter for the member who borrowed the publication.
          * @return Pointer to the member who borrowed the publication.
          */

@@ -12,6 +12,14 @@ Loan::Loan(Member* member, Publication* publication) {
     this->active = 0;
 }
 
+Loan::Loan(Member* member, Publication* publication, time_t due) {
+    //init class pointers
+    this->publication = publication;
+    this->member = member;
+    this->due = due;
+    this->active = 1;
+}
+
 Member* Loan::getMember() const {
     return this->member;
 }
