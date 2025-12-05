@@ -12,7 +12,7 @@ namespace util {
     *
     * @return The parsed input as string.
     */
-    std::string parseInput(std::istream& is);
+    std::string parseStringInput(std::istream& is);
 }
 
 #endif // UTIL_H

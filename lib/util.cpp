@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-std::string util::parseInput(std::istream& is) {
+std::string util::parseStringInput(std::istream& is) {
     //init parcing string
     char* str = new char[256];
 

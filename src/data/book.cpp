@@ -57,13 +57,13 @@ std::istream& operator>>(std::istream& is, Book& book) {
     is >> book.id;
 
     //get title from input stream
-    book.title = util::parseInput(is);
+    book.title = util::parseStringInput(is);
 
     //get author from input stream
-    book.author = util::parseInput(is);
+    book.author = util::parseStringInput(is);
 
     //get genre from input stream
-    book.genre = util::parseInput(is);
+    book.genre = util::parseStringInput(is);
 
     //get page count from input stream
     if (is.peek() != '\n' && is.peek() != EOF) {
