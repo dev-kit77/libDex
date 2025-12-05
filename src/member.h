@@ -7,7 +7,7 @@
 #include <vector>
 
 //forward declarations
-class Reservation;
+class Loan;
 class Publication;
 
 /**
@@ -15,7 +15,7 @@ class Publication;
  * Version 1.00.
  * Kit Cochrane.
  *
- * Designed to represent a Member of the library system. Stores Member information and current active Member Reservations.
+ * Designed to represent a Member of the library system. Stores Member information and current active Member Loans.
  */
 class Member {
     public:
@@ -47,20 +47,20 @@ class Member {
         std::string getName();
 
         /**
-         * Getter for Member Reservation at index.
+         * Getter for Member Loan at index.
          *
-         * @param index The index of the Reservation to retrieve.
-         * @return The publication ID of the item Reservation at the specified index, as string.
+         * @param index The index of the Loan to retrieve.
+         * @return The publication ID of the item Loan at the specified index, as string.
          */
-        Reservation* getReservation(int index);
+        Loan* getLoan(int index);
 
         /**
-         * Getter for Member Reservation with publication ID.
+         * Getter for Member Loan with publication ID.
          *
-         * @param publicationID The publication ID of the item Reservation to retrieve.
-         * @return The publication ID of the item Reservation at the specified index, as string.
+         * @param publicationID The publication ID of the item Loan to retrieve.
+         * @return The publication ID of the item Loan at the specified index, as string.
          */
-        Reservation* getReservation(const std::string& publicationID);
+        Loan* getLoan(const std::string& publicationID);
 
         /**
          * Method to loan out a publication that has been reserved.
@@ -71,47 +71,47 @@ class Member {
         int LoanOut(Loan* r);
 
         /**
-         * Getter for Member Reservations.
+         * Getter for Member Loans.
          *
-         * @return The Member's Reservations, as vector of strings.
+         * @return The Member's Loans, as vector of strings.
          */
-        std::vector<Reservation*>* getReservations();
+        std::vector<Loan*>* getLoans();
 
         /**
-         * Getter for Member Reservation count.
+         * Getter for Member Loan count.
          *
-         * @return The number of Reservations the Member has, as integer.
+         * @return The number of Loans the Member has, as integer.
          */
-        int getReservationCount();
+        int getLoanCount();
 
         /**
-         * Method to check if a Member has a Reservation for a specific publication.
+         * Method to check if a Member has a Loan for a specific publication.
          *
-         * @param Reservation The publication ID of the item Reservation to check, as string.
+         * @param Loan The publication ID of the item Loan to check, as string.
          * @return True if the Member has the publication, false otherwise.
          */
         int hasPublication(const std::string& publicationID);
 
         /**
-         * Method to add a Reservation to a Members account.
+         * Method to add a Loan to a Members account.
          *
-         * @param Reservation The publication ID of the item Reservation to add, as string.
+         * @param Loan The publication ID of the item Loan to add, as string.
          */
-        int addReservation(Publication* publication);
+        int addLoan(Publication* publication);
 
         /**
-         * Method to return a Reservation from a Members account.
+         * Method to return a Loan from a Members account.
          *
-         * @param Reservation The publication ID of the item Reservation to return, as string.
+         * @param Loan The publication ID of the item Loan to return, as string.
          */
-        int returnReservation(Publication* publication);
+        int returnLoan(Publication* publication);
 
         /**
-         * Method to clear all Reservations from a Members account.
+         * Method to clear all Loans from a Members account.
          *
          * @return Status code indicating success.
          */
-        int clearReservations();
+        int clearLoans();
 
         /**
          * Method to create a string representation of this Member object.
@@ -181,7 +181,7 @@ class Member {
     private:
         std::string id;
         std::string name;
-        std::vector<Reservation*>* Reservations;
+        std::vector<Loan*>* Loans;
 };
 
 #endif

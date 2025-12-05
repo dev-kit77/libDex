@@ -1,6 +1,5 @@
 //header includes
 #include "loan.h"
-#include "reservation.h"
 
 //standard library includes
 #include <ctime>
@@ -10,28 +9,32 @@ Loan::Loan(Member* member, Publication* publication) {
     //init class pointers
     this->publication = publication;
     this->member = member;
-
-    //set due to current time + 30 days
-    this->due = CURRENT_TIME + LOAN_DURATION;
+    this->active = 0;
 }
 
-Loan::Loan(Reservation* r) {
-    //init class pointers
-    this->publication = r->getPublication();
-    this->member = r->getMember();
-
-    //set due to current time + 30 days
-    this->due = CURRENT_TIME + LOAN_DURATION;
+Member* Loan::getMember() const {
+    return this->member;
 }
 
-std::time_t Loan::getDue() {
+Publication* Loan::getPublication() const {
+    return this->publication;
+}
+
+std::time_t Loan::getDue() const {
     return this->due;
+}
+
+int Loan::getActive() const {
+    return this->active;
 }
 
 std::time_t Loan::renew() {
     if (this->getPenalty() == 0) {
         //set due to current time + 30 days
         this->due = CURRENT_TIME + LOAN_DURATION;
+
+        //set active to 1
+        this->active = 1;
 
         //return new due date
         return this->due;
@@ -41,9 +44,9 @@ std::time_t Loan::renew() {
     return this->due;
 }
 
-double Loan::getPenalty() {
+double Loan::getPenalty() const {
     //check if loan is overdue
-    if (CURRENT_TIME > due) {
+    if (CURRENT_TIME > due && active == 1) {
         //return penalty
         return (CURRENT_TIME - due) * BOOK_RATE;
     }

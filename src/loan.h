@@ -1,11 +1,11 @@
 #ifndef LOAN_H
 #define LOAN_H
 
-//header includes
-#include "reservation.h"
-
 //standard library includes
 #include <ctime>
+
+class Member;
+class Publication;
 
 //Loan Related Constants
 #define CURRENT_TIME std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())
@@ -13,11 +13,11 @@
 #define BOOK_RATE 0.000025 //fraction of penny to be added per overdue second = £2.16 per day
 
 /**
- * Loan Reservation Sub-Class to represent a loan of a publication to a member, store due date, and cross-reference.
+ * Loan Class to represent a loan of a publication to a member, store due date, and cross-reference.
  * Version: 1.00.
  * Kit Cochrane.
  */
-class Loan : public Reservation {
+class Loan {
     public:
         /**
         * Constructor for Loan class. Creates a new loan with the given member and publication and sets the due date.
@@ -27,16 +27,28 @@ class Loan : public Reservation {
         Loan(Member* member, Publication* publication);
 
         /**
-        * Constructor for Loan class. Creates a new loan with the given reservation and sets the due date.
-        * @param r Pointer to the reservation that was made.
-        */
-        Loan(Reservation* r);
+         * Getter for the member who borrowed the publication.
+         * @return Pointer to the member who borrowed the publication.
+         */
+        Member* getMember() const;
+
+        /**
+         * Getter for the publication that was borrowed.
+         * @return Pointer to the publication that was borrowed.
+         */
+        Publication* getPublication() const;
 
         /**
          * Getter for the due date of the loan.
          * @return Time_t representing the due date of the loan.
          */
-        std::time_t getDue();
+        std::time_t getDue() const;
+
+        /**
+         * Getter for the active status of the loan.
+         * @return Integer representing the active status of the loan.
+         */
+        int getActive() const;
 
         /**
          * Renew the loan for an additional period.
@@ -48,9 +60,12 @@ class Loan : public Reservation {
          * Method to calculate the penalty for late return of the publication.
          * @return Double representing the penalty amount.
          */
-        double getPenalty();
+        double getPenalty() const ;
 
     private:
+        Member* member;
+        Publication* publication;
+        int active;
         std::time_t due;
 };
 
