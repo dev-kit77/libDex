@@ -4,7 +4,7 @@
 //standard library includes
 #include "loan.h"
 #include <string>
-#include <vector>
+#include <list>
 
 //forward declarations
 class Loan;
@@ -47,14 +47,6 @@ class Member {
         std::string getName();
 
         /**
-         * Getter for Member Loan at index.
-         *
-         * @param index The index of the Loan to retrieve.
-         * @return The publication ID of the item Loan at the specified index, as string.
-         */
-        Loan* getLoan(int index);
-
-        /**
          * Getter for Member Loan with publication ID.
          *
          * @param publicationID The publication ID of the item Loan to retrieve.
@@ -73,9 +65,9 @@ class Member {
         /**
          * Getter for Member Loans.
          *
-         * @return The Member's Loans, as vector of strings.
+         * @return The Member's Loans, as list of strings.
          */
-        std::vector<Loan*>* getLoans();
+        std::list<Loan*>* getLoans();
 
         /**
          * Getter for Member Loan count.
@@ -181,7 +173,7 @@ class Member {
     private:
         std::string id;
         std::string name;
-        std::vector<Loan*>* Loans;
+        std::list<Loan*>* Loans;
 };
 
 #endif

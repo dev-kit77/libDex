@@ -10,15 +10,15 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <vector>
+#include <list>
 
 Member::Member() {
     //init class fields as empty strings
     this->id = "";
     this->name = "";
 
-    //init empty Loan vector
-    this->Loans = new std::vector<Loan*>();
+    //init empty Loan list
+    this->Loans = new std::list<Loan*>();
 }
 
 Member::Member(const std::string& id, const std::string& name) {
@@ -26,8 +26,8 @@ Member::Member(const std::string& id, const std::string& name) {
     this->id = id;
     this->name = name;
 
-    //init empty vector
-    this->Loans = new std::vector<Loan*>();
+    //init empty list
+    this->Loans = new std::list<Loan*>();
 }
 
 std::string Member::getID() {
@@ -38,19 +38,8 @@ std::string Member::getName() {
     return this->name;
 }
 
-std::vector<Loan*>* Member::getLoans() {
+std::list<Loan*>* Member::getLoans() {
     return this->Loans;
-}
-
-Loan* Member::getLoan(int index) {
-    //check if index is valid
-    if (index >= 0 && index < this->Loans->size()) {
-        //return Loan at index
-        return this->Loans->at(index);
-    }
-
-    //return null
-    return NULL;
 }
 
 Loan* Member::getLoan(const std::string& publicationID) {
@@ -66,7 +55,7 @@ Loan* Member::getLoan(const std::string& publicationID) {
     }
 
     //return null
-    return NULL;
+    return nullptr;
 }
 
 int Member::getLoanCount() {
@@ -90,20 +79,20 @@ int Member::hasPublication(const std::string& publicationID) {
 }
 
 int Member::addLoan(Publication* publication) {
-    //check if Loan is already in vector
+    //check if Loan is already in list
     if (this->hasPublication(publication->getID()) == ELEMENT_FOUND) {
         //return status code
         return ELEMENT_ALREADY_EXISTS;
     }
     else {
         //instatise new Loan object
-        Loan* r = new Loan(this, publication);
+        Loan* l = new Loan(this, publication);
 
-        //add Loan to vector
-        this->Loans->push_back(r);
+        //add Loan to list
+        this->Loans->push_back(l);
 
         //add Loan to publication
-        publication->addLoan(r);
+        publication->addLoan(l);
     }
 
     //return status code
@@ -127,8 +116,8 @@ int Member::returnLoan(Publication* publication) {
             //update publication on Loan
             publication->returnLoan(l);
 
-            //erase Loan from vector
-            this->Loans->erase(this->Loans->begin() + i);
+            //erase Loan from list
+            this->Loans->remove(l);
 
             //delete Loan object
             delete l;
@@ -166,7 +155,7 @@ int Member::clearLoans() {
         delete l;
     }
 
-    //clear vector
+    //clear list
     this->Loans->clear();
 
     //return status code
