@@ -1,10 +1,9 @@
 #ifndef PUBLICATION_H
 #define PUBLICATION_H
 
-#include "reservation.h"
 #include "loan.h"
 #include <string>
-#include <vector>
+#include <list>
 
 /**
  * Publication Abstract Class for libDex.
@@ -29,9 +28,9 @@ class Publication {
         std::string getTitle() const;
 
         /**
-         * Getter for Reservations class field
+         * Getter for Loans class field
          */
-        std::vector<Reservation*>* getReservations();
+        std::list<Loan*>* getLoans();
 
         /**
          * Getter for copies class field
@@ -39,15 +38,15 @@ class Publication {
         int getAvailability() const;
 
         /**
-         * Method to add a Reservation to the publication
+         * Method to add a Loan to the publication
          */
-        int addReservation(Reservation* Reservation);
+        int addLoan(Loan* Loan);
 
         /**
          * Method to remove/return a reservation on the publication.
          * @return The cost of any fees on the loan/reservation.
          */
-        int returnPublication(Reservation* Reservation);
+        int returnLoan(Loan* Loan);
 
         /**
          * Method to get the current loan for the publication
@@ -127,7 +126,7 @@ class Publication {
         std::string id;
         std::string title;
         int available;
-        std::vector<Reservation*>* Reservations;
+        std::list<Loan*>* Loans;
 
         /**
          * Method to update the loan status of a publication.

@@ -3,17 +3,17 @@
 #include "codes.h"
 #include "loan.h"
 #include "member.h"
-#include "reservation.h"
 
 //standard library includes
+#include <cstddef>
+#include <list>
 #include <string>
-#include <vector>
 
     Publication::Publication() {
         this->id = "";
         this->title = "";
         this->available = 0;
-        this->Reservations = new std::vector<Reservation*>();
+        this->Loans = new std::list<Loan*>();
     }
 
     std::string Publication::getID() const {
@@ -24,17 +24,17 @@
         return this->title;
     }
 
-    std::vector<Reservation*>* Publication::getReservations() {
-        return this->Reservations;
+    std::list<Loan*>* Publication::getLoans() {
+        return this->Loans;
     }
 
     int Publication::getAvailability() const {
         return this->available;
     }
 
-    int Publication::addReservation(Reservation* r) {
-        //add Reservation to vector
-        this->Reservations->push_back(r);
+    int Publication::addLoan(Loan* r) {
+        //add Loan to List
+        this->Loans->push_back(r);
 
         //update loan status
         this->updateLoan();
@@ -43,15 +43,15 @@
         return ELEMENT_ADDED;
     }
 
-    int Publication::returnPublication(Reservation* r) {
+    int Publication::returnLoan(Loan* r) {
         //init index counter
         int i = 0;
 
-        //loop for all Reservations
-        for (Reservation* l : *this->Reservations) {
+        //loop for all Loans
+        for (Loan* l : *this->Loans) {
             if (l == r) {
-                //remove Reservation from vector
-                this->Reservations->erase(this->Reservations->begin() + i);
+                //remove Loan from List
+                this->Loans->remove(l);
 
                 //update loan status
                 this->updateLoan();
@@ -69,23 +69,26 @@
     }
 
     Loan* Publication::getLoan() const {
-        return (Loan*) this->Reservations->front();
+        return this->Loans->front();
     }
 
     int Publication::updateLoan() {
         //init head object
-        Reservation* head = this->Reservations->front();
+        Loan* head = this->Loans->front();
 
-        //check if first element is a Reservation
-        if (typeid(*head) == typeid(Reservation)) {
-            //create new Loan object
-            head = new Loan(head);
+        //check if list is empty
+        if (head != nullptr) {
+            //update availability
+            this->available = 0;
 
-            //get member to update
-            Member* m = head->getMember();
-
-            //update member's loan status
-            m->LoanOut((Loan*)head);
+            //check if loan is active
+            if (!head->getActive()) {
+                //make loan active
+                head->renew();
+            }
+        }
+        else {
+            this->available = 1;
         }
 
         //return status
