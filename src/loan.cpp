@@ -24,11 +24,11 @@ Loan::Loan(Reservation* r) {
     this->due = CURRENT_TIME + LOAN_DURATION;
 }
 
-time_t Loan::getDue() {
+std::time_t Loan::getDue() {
     return this->due;
 }
 
-time_t Loan::renew() {
+std::time_t Loan::renew() {
     if (this->getPenalty() == 0) {
         //set due to current time + 30 days
         this->due = CURRENT_TIME + LOAN_DURATION;
