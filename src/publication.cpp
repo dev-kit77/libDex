@@ -12,31 +12,37 @@
         return this->title;
     }
 
-    std::vector<Loan*>* Publication::getLoans() {
-        return &this->loans;
+    std::vector<Reservation*>* Publication::getReservations() {
+        return this->Reservations;
     }
 
-    int Publication::getCopies() const {
-        return this->copies;
+    int Publication::getAvailability() const {
+        return this->available;
     }
 
-    int Publication::addLoan(Loan* loan) {
-        //add loan to vector
-        this->loans.push_back(loan);
+    int Publication::addReservation(Reservation* r) {
+        //add Reservation to vector
+        this->Reservations->push_back(r);
+
+        //update loan status
+        this->updateLoan();
 
         //return status
         return ELEMENT_ADDED;
     }
 
-    int Publication::returnLoan(Loan* loan) {
+    int Publication::returnPublication(Reservation* r) {
         //init index counter
         int i = 0;
 
-        //loop for all loans
-        for (Loan* l : this->loans) {
-            if (l == loan) {
-                //remove loan from vector
-                this->loans.erase(this->loans.begin() + i);
+        //loop for all Reservations
+        for (Reservation* l : *this->Reservations) {
+            if (l == r) {
+                //remove Reservation from vector
+                this->Reservations->erase(this->Reservations->begin() + i);
+
+                //update loan status
+                this->updateLoan();
 
                 //return status code
                 return ELEMENT_DELETED;
@@ -70,7 +76,7 @@
         return this->title.compare(s) < 0;
     }
 
-    int operator==(Publication& p1, Publication& p2) {
+    int operator==(const Publication& p1, const Publication& p2) {
         //compare titles
         return (p1.title.compare(p2.title) == 0 && p1.getType() == p2.getType());
     }

@@ -1,6 +1,10 @@
 #ifndef LOAN_H
 #define LOAN_H
 
+//header includes
+#include "reservation.h"
+
+//standard library includes
 #include <ctime>
 
 //Loan Related Constants
@@ -8,15 +12,12 @@
 #define LOAN_DURATION (30*60*60*24)
 #define BOOK_RATE 0.000025 //fraction of penny to be added per overdue second = £2.16 per day
 
-class Member;
-class Publication;
-
 /**
- * Loan Class to represent a loan of a publication to a member, store due date, and cross-reference.
+ * Loan Reservation Sub-Class to represent a loan of a publication to a member, store due date, and cross-reference.
  * Version: 1.00.
  * Kit Cochrane.
  */
-class Loan {
+class Loan : public Reservation {
     public:
         /**
         * Constructor for Loan class. Creates a new loan with the given member and publication and sets the due date.
@@ -26,16 +27,10 @@ class Loan {
         Loan(Member* member, Publication* publication);
 
         /**
-         * Getter for the member who borrowed the publication.
-         * @return Pointer to the member who borrowed the publication.
-         */
-        Member* getMember();
-
-        /**
-         * Getter for the publication that was borrowed.
-         * @return Pointer to the publication that was borrowed.
-         */
-        Publication* getPublication();
+        * Constructor for Loan class. Creates a new loan with the given reservation and sets the due date.
+        * @param r Pointer to the reservation that was made.
+        */
+        Loan(Reservation* r);
 
         /**
          * Getter for the due date of the loan.
@@ -56,8 +51,6 @@ class Loan {
         double getPenalty();
 
     private:
-        Member* member;
-        Publication* publication;
         std::time_t due;
 };
 

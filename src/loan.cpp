@@ -1,4 +1,8 @@
+//header includes
 #include "loan.h"
+#include "reservation.h"
+
+//standard library includes
 #include <ctime>
 #include <chrono>
 
@@ -11,12 +15,13 @@ Loan::Loan(Member* member, Publication* publication) {
     this->due = CURRENT_TIME + LOAN_DURATION;
 }
 
-Member* Loan::getMember() {
-    return this->member;
-}
+Loan::Loan(Reservation* r) {
+    //init class pointers
+    this->publication = r->getPublication();
+    this->member = r->getMember();
 
-Publication* Loan::getPublication() {
-    return this->publication;
+    //set due to current time + 30 days
+    this->due = CURRENT_TIME + LOAN_DURATION;
 }
 
 time_t Loan::getDue() {

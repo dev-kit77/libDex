@@ -1,7 +1,7 @@
 //header includes
 #include "member.h"
-#include "library.h"
 #include "loan.h"
+#include "reservation.h"
 #include "codes.h"
 #include "publication.h"
 
@@ -18,8 +18,8 @@ Member::Member() {
     this->id = "";
     this->name = "";
 
-    //init empty loan vector
-    this->loans = new std::vector<Loan*>();
+    //init empty Reservation vector
+    this->Reservations = new std::vector<Reservation*>();
 }
 
 Member::Member(const std::string& id, const std::string& name) {
@@ -28,7 +28,7 @@ Member::Member(const std::string& id, const std::string& name) {
     this->name = name;
 
     //init empty vector
-    this->loans = new std::vector<Loan*>();
+    this->Reservations = new std::vector<Reservation*>();
 }
 
 std::string Member::getID() {
@@ -39,28 +39,28 @@ std::string Member::getName() {
     return this->name;
 }
 
-std::vector<Loan*>* Member::getLoans() {
-    return this->loans;
+std::vector<Reservation*>* Member::getReservations() {
+    return this->Reservations;
 }
 
-Loan* Member::getLoan(int index) {
+Reservation* Member::getReservation(int index) {
     //check if index is valid
-    if (index >= 0 && index < this->loans->size()) {
-        //return loan at index
-        return this->loans->at(index);
+    if (index >= 0 && index < this->Reservations->size()) {
+        //return Reservation at index
+        return this->Reservations->at(index);
     }
 
     //return null
     return NULL;
 }
 
-Loan* Member::getLoan(const std::string& publicationID) {
-    //loop for all loans
-    for (Loan* l : *this->loans) {
+Reservation* Member::getReservation(const std::string& publicationID) {
+    //loop for all Reservations
+    for (Reservation* l : *this->Reservations) {
         if (l->getPublication() != nullptr) {
-            //check if loan is found
+            //check if Reservation is found
             if (l->getPublication()->getID() == publicationID) {
-                //return loan
+                //return Reservation
                 return l;
             }
         }
@@ -70,15 +70,35 @@ Loan* Member::getLoan(const std::string& publicationID) {
     return NULL;
 }
 
-int Member::getLoanCount() {
-    return this->loans->size();
+int Member::LoanOut(Loan* r) {
+    //loop for all Reservations
+    for (Reservation* l : *this->Reservations) {
+        //check for null pointer
+        if (l->getPublication() != nullptr) {
+            //check if Reservation is found
+            if (l->getPublication()->getID() == r->getPublication()->getID()) {
+                //replace Reservation with Loan
+                l = r;
+
+                //return status code
+                return ELEMENT_UPDATED;
+            }
+        }
+    }
+
+    //return status code
+    return ELEMENT_NOT_FOUND;
+}
+
+int Member::getReservationCount() {
+    return this->Reservations->size();
 }
 
 int Member::hasPublication(const std::string& publicationID) {
-    //loop for all loans
-    for (Loan* l : *this->loans) {
+    //loop for all Reservations
+    for (Reservation* l : *this->Reservations) {
         if (l->getPublication() != nullptr) {
-            //check if loan is found
+            //check if Reservation is found
             if (l->getPublication()->getID() == publicationID) {
                 //return status code
                 return ELEMENT_FOUND;
@@ -90,42 +110,51 @@ int Member::hasPublication(const std::string& publicationID) {
     return ELEMENT_NOT_FOUND;
 }
 
-int Member::addLoan(Publication* publication) {
-    //check if loan is already in vector
+int Member::addReservation(Publication* publication) {
+    //check if Reservation is already in vector
     if (this->hasPublication(publication->getID()) == ELEMENT_FOUND) {
         //return status code
         return ELEMENT_ALREADY_EXISTS;
     }
     else {
-        //instatise new loan object
-        Loan* loan = new Loan(this, publication);
+        //instatise new Reservation object
+        Reservation* r = new Reservation(this, publication);
 
-        //add loan to vector
-        this->loans->push_back(loan);
+        //add Reservation to vector
+        this->Reservations->push_back(r);
 
-        //add loan to publication
-        publication->addLoan(loan);
+        //add Reservation to publication
+        publication->addReservation(r);
     }
 
     //return status code
     return ELEMENT_ADDED;
 }
 
-int Member::returnLoan(Publication* publication) {
+int Member::returnReservation(Publication* publication) {
     //init index counter
     int i = 0;
 
-    //loop for all loans
-    for (Loan* l : *this->loans) {
-        //check if loan is found
+    //loop for all Reservations
+    for (Reservation* l : *this->Reservations) {
+        //check if Reservation is found
         if (l->getPublication() == publication) {
-            //update publication on loan
-            publication->returnLoan(l);
+            //check if Reservation is a Loan
+            if (typeid(*l) == typeid(Loan)) {
+                //check for penalty
+                if (((Loan*)l)->getPenalty() > 0) {
+                    //return status code;
+                    return PENALTY_DUE;
+                }
+            }
 
-            //erase loan from vector
-            this->loans->erase(this->loans->begin() + i);
+            //update publication on Reservation
+            publication->returnPublication(l);
 
-            //delete loan object
+            //erase Reservation from vector
+            this->Reservations->erase(this->Reservations->begin() + i);
+
+            //delete Reservation object
             delete l;
 
             //return status code
@@ -140,23 +169,29 @@ int Member::returnLoan(Publication* publication) {
     return ELEMENT_NOT_FOUND;
 }
 
-int Member::clearLoans() {
-    //loop for all loans
-    for (Loan* l : *this->loans) {
-        if (l->getPublication() != nullptr) {
-            //update publication on loan
-            l->getPublication()->returnLoan(l);
+int Member::clearReservations() {
+    //loop for all Reservations
+    for (Reservation* l : *this->Reservations) {
+        //check if Reservation is a Loan
+        if (typeid(*l) == typeid(Loan)) {
+            //check for penalty
+            if (((Loan*)l)->getPenalty() > 0) {
+                //return status code;
+                return PENALTY_DUE;
+            }
         }
 
-        //delete loan object
+        if (l->getPublication() != nullptr) {
+            //update publication on Reservation
+            l->getPublication()->returnPublication(l);
+        }
+
+        //delete Reservation object
         delete l;
     }
 
     //clear vector
-    this->loans->clear();
-
-    //delete vector object
-    delete this->loans;
+    this->Reservations->clear();
 
     //return status code
     return ELEMENT_DELETED;
@@ -169,10 +204,10 @@ std::string Member::toString() const {
     //add Member ID and name to result string
     *ss << this->id << " " << this->name << " ";
 
-    //loop for all loans
-    for (Loan* l : *this->loans) {
+    //loop for all Reservations
+    for (Reservation* l : *this->Reservations) {
         if (l->getPublication() != nullptr) {
-            //add current loan ID to result string
+            //add current Reservation ID to result string
             *ss << l->getPublication()->getID() << " ";
         }
     }
@@ -220,14 +255,8 @@ std::istream& operator>>(std::istream& is, Member& member) {
 
     //loop until end of line
     while (is.peek() != '\n' && is.peek() != EOF) {
-        //init publication ID
-        std::string* pubID = new std::string();
-
-        //read publication ID
-        is >> *pubID;
-
-        //create new loan object with member and link publication from library
-        member.loans->push_back(new Loan(&member, Library::getPublication(*pubID)));
+        //skip past redundant data (now stored in reservations.txt)
+        is.ignore();
     }
 
     //return input stream

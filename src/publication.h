@@ -15,7 +15,7 @@
 class Publication {
     public:
         Publication();
-        virtual ~Publication();
+        virtual ~Publication() {}
 
         /**
          * Getter for id class field
@@ -30,22 +30,28 @@ class Publication {
         /**
          * Getter for loans class field
          */
-        std::vector<Loan*>* getLoans();
+        std::vector<Reservation*>* getReservations();
 
         /**
          * Getter for copies class field
          */
-        int getCopies() const;
+        int getAvailability() const;
 
         /**
-         * Method to add a loan to the publication
+         * Method to add a Reservation to the publication
          */
-        int addLoan(Loan* loan);
+        int addReservation(Reservation* Reservation);
 
         /**
-         * Method to return a loan from the publication
+         * Method to remove/return a reservation on the publication.
+         * @return The cost of any fees on the loan/reservation.
          */
-        int returnLoan(Loan* loan);
+        int returnPublication(Reservation* Reservation);
+
+        /**
+         * Method to get the current loan for the publication
+         */
+        Loan* getLoan() const;
 
         /**
          * Operator overload to compare two publications lexographically by title.
