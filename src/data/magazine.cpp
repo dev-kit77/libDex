@@ -1,6 +1,6 @@
 //header includes
 #include "magazine.h"
-#include "util.h"
+#include "util.hpp"
 
 //standard library includes
 #include <cstdio>
