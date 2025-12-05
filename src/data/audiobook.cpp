@@ -66,21 +66,11 @@ std::istream& operator>>(std::istream& is, AudioBook& a) {
     a.genre = util::parseStringInput(is);
 
     //get duration from input stream
-    if (is.peek() != '\n' && is.peek() != EOF) {
-        is >> a.duration;
-    }
-    else {
-        is.ignore();
-    }
+    a.duration = util::parse<double>(is);
 
     //get copies from input stream
     if (is.peek() != '\n' && is.peek() != EOF) {
         is >> a.available;
-    }
-    else {
-        if (!is.eof()) {
-            is.ignore();
-        }
     }
 
     //return input stream

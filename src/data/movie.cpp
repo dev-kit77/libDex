@@ -75,21 +75,11 @@ std::istream& operator>>(std::istream& is, Movie& m) {
     m.genre = util::parseStringInput(is);
 
     //get duration from input stream
-    if (is.peek() != '\n' && is.peek() != EOF) {
-        is >> m.duration;
-    }
-    else {
-        is.ignore();
-    }
+    m.duration = util::parse<double>(is);
 
     //get copies from input stream
     if (is.peek() != '\n' && is.peek() != EOF) {
         is >> m.available;
-    }
-    else {
-        if (!is.eof()) {
-            is.ignore();
-        }
     }
 
     //return input stream

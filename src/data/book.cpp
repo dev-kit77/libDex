@@ -66,21 +66,11 @@ std::istream& operator>>(std::istream& is, Book& b) {
     b.genre = util::parseStringInput(is);
 
     //get page count from input stream
-    if (is.peek() != '\n' && is.peek() != EOF) {
-        is >> b.pageCount;
-    }
-    else {
-        is.ignore();
-    }
+    b.pageCount = util::parse<int>(is);
 
     //get copies from input stream
     if (is.peek() != '\n' && is.peek() != EOF) {
         is >> b.available;
-    }
-    else {
-        if (!is.eof()) {
-            is.ignore();
-        }
     }
 
     //return input stream

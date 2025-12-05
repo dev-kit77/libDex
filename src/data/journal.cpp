@@ -84,12 +84,7 @@ std::istream& operator>>(std::istream& is, Journal& j) {
     j.author = util::parseStringInput(is);
 
     //get volume from input stream
-    if (is.peek() != '\n' && is.peek() != EOF) {
-        is >> j.volume;
-    }
-    else {
-        is.ignore();
-    }
+    j.volume = util::parse<int>(is);
 
     //get publisher from input stream
     j.publisher = util::parseStringInput(is);
@@ -97,33 +92,18 @@ std::istream& operator>>(std::istream& is, Journal& j) {
     //get location from input stream
     j.location = util::parseStringInput(is);
 
-    //get duration from input stream
-    if (is.peek() != '\n' && is.peek() != EOF) {
-        is >> j.year;
-    }
-    else {
-        is.ignore();
-    }
+    //get year from input stream
+    j.year = util::parse<int>(is);
 
     //get location from input stream
     j.category = util::parseStringInput(is);
 
-    //get duration from input stream
-    if (is.peek() != '\n' && is.peek() != EOF) {
-        is >> j.year;
-    }
-    else {
-        is.ignore();
-    }
+    //get page number from input stream
+    j.pageNo = util::parse<int>(is);
 
     //get copies from input stream
     if (is.peek() != '\n' && is.peek() != EOF) {
         is >> j.available;
-    }
-    else {
-        if (!is.eof()) {
-            is.ignore();
-        }
     }
 
     //return input stream

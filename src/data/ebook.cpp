@@ -72,11 +72,6 @@ std::istream& operator>>(std::istream& is, EBook& e) {
     if (is.peek() != '\n' && is.peek() != EOF) {
         is >> e.available;
     }
-    else {
-        if (!is.eof()) {
-            is.ignore();
-        }
-    }
 
     //return input stream
     return is;

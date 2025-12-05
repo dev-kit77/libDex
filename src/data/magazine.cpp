@@ -69,32 +69,17 @@ std::istream& operator>>(std::istream& is, Magazine& m) {
     m.publisher = util::parseStringInput(is);
 
     //get duration from input stream
-    if (is.peek() != '\n' && is.peek() != EOF) {
-        is >> m.issue;
-    }
-    else {
-        is.ignore();
-    }
+    m.issue = util::parse<int>(is);
 
     //get genre from input stream
     m.category = util::parseStringInput(is);
 
     //get duration from input stream
-    if (is.peek() != '\n' && is.peek() != EOF) {
-        is >> m.pageCount;
-    }
-    else {
-        is.ignore();
-    }
+    m.pageCount = util::parse<int>(is);
 
     //get copies from input stream
     if (is.peek() != '\n' && is.peek() != EOF) {
         is >> m.available;
-    }
-    else {
-        if (!is.eof()) {
-            is.ignore();
-        }
     }
 
     //return input stream
