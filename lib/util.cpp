@@ -11,6 +11,12 @@ std::string util::parseInput(std::istream& is) {
     while (is.peek() != '\"') {
         //ignore characters until quote is found
         is.ignore();
+
+        //check for end of file
+        if (is.eof()) {
+            delete[] str;
+            return "";
+        }
     }
 
     //consume opening quote

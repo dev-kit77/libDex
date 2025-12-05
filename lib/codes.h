@@ -27,7 +27,8 @@
 #define FILE_ERROR 407
 #define FILE_NOT_FOUND 408
 #define FILE_READ_ONLY 409
-#define ALLOC_ERROR 410
-#define PENALTY_DUE 411
+#define FILE_PARTIALLY_READ 410
+#define ALLOC_ERROR 411
+#define PENALTY_DUE 412
 
 #endif

@@ -7,7 +7,9 @@
 #include "codes.h"
 
 //standard library includes
+#include <cerrno>
 #include <cstdio>
+#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -291,9 +293,30 @@ inline int SortedList<dataType, searchType>::load(const std::string& filename) {
         file >> *data;
 
         //check if data read is valid
-        if (!file.fail()) {
+        if (file.bad() && !file.eof()) {
+            if (file.bad()) {
+                //return status code
+                return FILE_ERROR;
+            }
+            else {
+                //delete invalid data
+                delete data;
+
+                //print error message
+                std::cerr << "Error reading data from file: " << filename << ". Node Discarded." << std::endl;
+
+                //return status code
+                return FILE_PARTIALLY_READ;
+            }
+        }
+        else {
             //insert data into list
             this->insert(*data);
+        }
+
+        //move stream to next line or end of file
+        while (file.peek() == '\n') {
+            file.ignore();
         }
     }
 

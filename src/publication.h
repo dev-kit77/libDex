@@ -1,6 +1,7 @@
 #ifndef PUBLICATION_H
 #define PUBLICATION_H
 
+#include "reservation.h"
 #include "loan.h"
 #include <string>
 #include <vector>
@@ -28,7 +29,7 @@ class Publication {
         std::string getTitle() const;
 
         /**
-         * Getter for loans class field
+         * Getter for Reservations class field
          */
         std::vector<Reservation*>* getReservations();
 
@@ -109,24 +110,31 @@ class Publication {
          * @param publication The Publication to compare with.
          * @return 1 if the Publications titles are the same, 0 otherwise.
          */
-        friend int operator==(Publication& p1, Publication& p2);
+        friend int operator==(const Publication& p1, const Publication& p2);
 
         /**
          * toString method to return a string representation of the publication. Pure virtual method to be implemented by subclasses.
          */
-        const virtual std::string toString() = 0;
+        virtual std::string toString() const = 0;
 
         /**
          * getType method to return the type of the publication. Pure virtual method to be implemented by subclasses.
          */
-        const virtual std::string getType() = 0;
+        virtual std::string getType() const = 0;
 
     protected:
         //class fields
         std::string id;
         std::string title;
-        int copies;
-        std::vector<Loan*> loans;
+        int available;
+        std::vector<Reservation*>* Reservations;
+
+        /**
+         * Method to update the loan status of a publication.
+         *
+         * @return The result of the update operation, as integer.
+         */
+        int updateLoan();
 };
 
 #endif

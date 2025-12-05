@@ -1,8 +1,20 @@
+//header includes
 #include "publication.h"
 #include "codes.h"
 #include "loan.h"
+#include "member.h"
+#include "reservation.h"
+
+//standard library includes
 #include <string>
 #include <vector>
+
+    Publication::Publication() {
+        this->id = "";
+        this->title = "";
+        this->available = 0;
+        this->Reservations = new std::vector<Reservation*>();
+    }
 
     std::string Publication::getID() const {
         return this->id;
@@ -54,6 +66,30 @@
 
         //return status code
         return ELEMENT_NOT_FOUND;
+    }
+
+    Loan* Publication::getLoan() const {
+        return (Loan*) this->Reservations->front();
+    }
+
+    int Publication::updateLoan() {
+        //init head object
+        Reservation* head = this->Reservations->front();
+
+        //check if first element is a Reservation
+        if (typeid(*head) == typeid(Reservation)) {
+            //create new Loan object
+            head = new Loan(head);
+
+            //get member to update
+            Member* m = head->getMember();
+
+            //update member's loan status
+            m->LoanOut((Loan*)head);
+        }
+
+        //return status
+        return ELEMENT_UPDATED;
     }
 
     int Publication::operator>(const Publication& publication) const {
