@@ -145,4 +145,7 @@ int main() {
 
     //print separator
     interface::separator();
+
+    //exit program
+    return 0;
 }
