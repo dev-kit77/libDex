@@ -9,17 +9,18 @@
 #include <string>
 
 Journal::Journal() {
-    this->category = "";
-    this->publisher = "";
     this->volume = 0;
+    this->publisher = "";
+    this->location = "";
+    this->year = 0;
     this->pageNo = 0;
+    this->category = "";
 }
 
-Journal::Journal(const std::string id, const std::string& title, const std::string& author, const int volume, const std::string& publisher, const std::string& location, const int year, const int pageNo, const std::string& category, const int avaliability) {
+Journal::Journal(const std::string id, const std::string& title, const int volume, const std::string& publisher, const std::string& location, const int year, const int pageNo, const std::string& category, const int avaliability) {
     //init fields
     this->id = id;
     this->title = title;
-    this->author = author;
     this->volume = volume;
     this->publisher = publisher;
     this->location = location;
@@ -27,10 +28,6 @@ Journal::Journal(const std::string id, const std::string& title, const std::stri
     this->pageNo = pageNo;
     this->category = category;
     this->available = avaliability;
-}
-
-std::string Journal::getAuthor() const {
-    return this->author;
 }
 
 int Journal::getVolume() const {
@@ -58,7 +55,7 @@ int Journal::getPageNo() const {
 }
 
 std::string Journal::toString() const {
-    return this->id + " \"" + this->title + "\" \"" + this->author + "\" " + std::to_string(this->volume) + " \"" + this->publisher + "\" \"" + this->location + "\" " + std::to_string(this->year) + " \"" + this->category + "\" " + std::to_string(this->pageNo) + " " + std::to_string(this->available);
+    return this->id + " \"" + this->title + "\" " + std::to_string(this->volume) + " \"" + this->publisher + "\" \"" + this->location + "\" " + std::to_string(this->year) + " \"" + this->category + "\" " + std::to_string(this->pageNo) + " " + std::to_string(this->available);
 }
 
 std::string Journal::getType() const {
@@ -79,9 +76,6 @@ std::istream& operator>>(std::istream& is, Journal& j) {
 
     //get title from input stream
     j.title = util::parseStringInput(is);
-
-    //get author from input stream
-    j.author = util::parseStringInput(is);
 
     //get volume from input stream
     j.volume = util::parse<int>(is);

@@ -23,7 +23,7 @@ class Journal : public Publication {
          * @param category category of the Journal
          * @param avalability number of copies available for the Journal
          */
-        Journal(const std::string id, const std::string& title, const std::string& author, const int volume, const std::string& publisher, const std::string& location, const int year, const int pageNo, const std::string& category, const int avalability);
+        Journal(const std::string id, const std::string& title, const int volume, const std::string& publisher, const std::string& location, const int year, const int pageNo, const std::string& category, const int avalability);
 
         /**
          * Getter for author class field
@@ -105,7 +105,6 @@ class Journal : public Publication {
         friend int operator==(const Publication& p1, const Publication& p2);
     private:
         //class fields
-        std::string author;
         int volume;
         std::string publisher;
         std::string location;
