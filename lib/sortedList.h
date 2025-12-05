@@ -160,6 +160,12 @@ class SortedList {
         int load(const std::string& filename);
 
         /**
+         * Operator overload for +=. Adds all members of the provided list to this list.
+         * @param l the list to insert to the current list
+         */
+        SortedList<dataType, searchType>* operator+=(SortedList<dataType, searchType>* l);
+
+        /**
          * Operator overload to print the list to an output stream.
          *
          * @param os The output stream to print the list to.

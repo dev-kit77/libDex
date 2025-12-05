@@ -4,8 +4,6 @@
 #include "sortedList.hpp"
 #include "member.h"
 
-
-
 //standard library includes
 #include <ctime>
 #include <cstdlib>
@@ -338,12 +336,26 @@ int main() {
     interface::printMessage("Printing new list for validation:");
     std::cout << newList << std::endl;
 
+    //print newline
+    interface::newLine();
+
+    //print new list for validation
+    interface::printMessage("Testing += overload:");
+
+    //execute
+    *sortedList += newList;
+
+    //print newline
+    interface::newLine();
+
+    //print new list for validation
+    interface::printMessage("Printing list for validation:");
+    std::cout << sortedList << std::endl;
+
     //print divider
     interface::separator();
     interface::printMessage("Complex Type Tests");
     interface::separator();
-
-
 
     //test loading list from file
     interface::printMessage("Loading list from file: members.txt");
@@ -352,7 +364,7 @@ int main() {
     SortedList<Member, std::string>* memberList = new SortedList<Member, std::string>();
 
     //load file
-    returnValue = memberList->load("members.txt");
+    returnValue = memberList->load("libdex/members.txt");
 
     //check result
     if (returnValue == FILE_READ) {

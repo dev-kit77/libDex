@@ -61,10 +61,12 @@ inline int SortedList<dataType, searchType>::insert(dataType& value) {
                 //set insertion node to previous node
                 insertionNode = prevNode;
             }
-            else if (currNode->getData() == value) {
-                //set insertion node to current node
-                insertionNode = currNode;
-            }
+        }
+
+        //check to see if current node should be insertion point
+        if (currNode->getData() == value) {
+            //set insertion node to current node
+            insertionNode = currNode;
         }
 
         //update search nodes
@@ -325,6 +327,18 @@ inline int SortedList<dataType, searchType>::load(const std::string& filename) {
 
     //return success code
     return FILE_READ;
+}
+
+template<class dataType, typename searchType>
+SortedList<dataType, searchType>* SortedList<dataType, searchType>::operator+=(SortedList<dataType, searchType>* l) {
+    //loop for all nodes in new list
+    for (int i = 0; i < l->size(); i++) {
+        //insert data into this list
+        this->insert(*l->get(i));
+    }
+
+    //return current object
+    return this;
 }
 
 template<class dataType, typename searchType>
