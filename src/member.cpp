@@ -167,13 +167,13 @@ std::string Member::toString() const {
     std::stringstream* ss = new std::stringstream();
 
     //add Member ID and name to result string
-    *ss << this->id << " " << this->name << " ";
+    *ss << this->id << " " << this->name;
 
     //loop for all Loans
     for (Loan* l : *this->Loans) {
         if (l->getPublication() != nullptr) {
             //add current Loan ID to result string
-            *ss << l->getPublication()->getID() << " ";
+            *ss << " " << l->getPublication()->getID();
         }
     }
 
