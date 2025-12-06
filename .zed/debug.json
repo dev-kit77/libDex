@@ -24,7 +24,7 @@
   {
     "label": "libDex: Debug Library Tests",
     "command": "libdex: Compile Library Tests",
-    "program": "./bin/libTests.out",
+    "program": "./bin/libraryTests.out",
     "request": "launch",
     "adapter": "CodeLLDB",
     "cwd": "$ZED_WORKTREE_ROOT"
@@ -42,7 +42,16 @@
   {
     "label": "libDex: Debug Publication Tests",
     "command": "libdex: Compile Publication Tests",
-    "program": "./bin/pubTests.out",
+    "program": "./bin/publicationTests.out",
+    "request": "launch",
+    "adapter": "CodeLLDB",
+    "cwd": "$ZED_WORKTREE_ROOT"
+  },
+
+  {
+    "label": "libDex: Debug Utility Tests",
+    "command": "libdex: Compile Utility Tests",
+    "program": "./bin/UtilityTests.out",
     "request": "launch",
     "adapter": "CodeLLDB",
     "cwd": "$ZED_WORKTREE_ROOT"

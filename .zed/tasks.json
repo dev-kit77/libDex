@@ -30,14 +30,21 @@
 
   {
     "label": "libDex: Compile List Tests",
-    "command": "g++ -g ./lib/*.cpp ./src/*.cpp ./tests/listTest.cpp -o ./bin/listTests.out -I./lib -I./src -I./src/data",
+    "command": "g++ -g ./lib/*.cpp ./src/*.cpp ./src/data/*.cpp ./tests/listTest.cpp -o ./bin/listTests.out -I./lib -I./src -I./src/data",
     "use_new_terminal": false,
     "reveal": "always"
   },
 
   {
     "label": "libDex: Compile Publication Tests",
-    "command": "g++ -g ./lib/*.cpp ./src/*.cpp ./src/data/*.cpp ./tests/pubTest.cpp -o ./bin/pubTests.out -I./lib -I./src -I./src/data",
+    "command": "g++ -g ./lib/*.cpp ./src/*.cpp ./src/data/*.cpp ./tests/pubTest.cpp -o ./bin/publicationTests.out -I./lib -I./src -I./src/data",
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+
+  {
+    "label": "libDex: Compile Utility Tests",
+    "command": "g++ -g ./lib/*.cpp ./tests/utiltest.cpp -o ./bin/UtilityTests.out -I./lib -I./src -I./src/data",
     "use_new_terminal": false,
     "reveal": "always"
   }
