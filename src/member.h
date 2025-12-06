@@ -37,14 +37,14 @@ class Member {
          *
          * @return The Member's ID, as string.
          */
-        std::string getID();
+        std::string getID() const;
 
         /**
          * Getter for Member name.
          *
          * @return The Member's name, as string.
          */
-        std::string getName();
+        std::string getName() const;
 
         /**
          * Getter for Member Loan with publication ID.
@@ -67,14 +67,14 @@ class Member {
          *
          * @return The Member's Loans, as list of strings.
          */
-        std::list<Loan*>* getLoans();
+        std::list<Loan*>* getLoans() const;
 
         /**
          * Getter for Member Loan count.
          *
          * @return The number of Loans the Member has, as integer.
          */
-        int getLoanCount();
+        int getLoanCount() const;
 
         /**
          * Method to check if a Member has a Loan for a specific publication.
@@ -82,7 +82,7 @@ class Member {
          * @param Loan The publication ID of the item Loan to check, as string.
          * @return True if the Member has the publication, false otherwise.
          */
-        int hasPublication(const std::string& publicationID);
+        int hasPublication(const std::string& publicationID) const;
 
         /**
          * Method to add a Loan to a Members account.
@@ -90,6 +90,13 @@ class Member {
          * @param Loan The publication ID of the item Loan to add, as string.
          */
         int addLoan(Publication* publication);
+
+        /**
+         * Method to add a Loan to a Members account.
+         *
+         * @param Loan The Loan to add.
+         */
+        int addLoan(Loan* loan);
 
         /**
          * Method to return a Loan from a Members account.
@@ -118,7 +125,7 @@ class Member {
          * @param member The Member to compare with.
          * @return 1 if this Member's name is first alphabetically, 0 otherwise.
          */
-        int operator<(Member& member);
+        int operator<(Member& member) const;
 
         /**
          * Operator overload to compare a Member's name with a string lexographically.
@@ -126,7 +133,7 @@ class Member {
          * @param s The string to compare with.
          * @return 1 if this Member's name is first alphabetically, 0 otherwise.
          */
-        int operator<(const std::string& s);
+        int operator<(const std::string& s) const;
 
         /**
          * Operator overload to compare two Members lexographically by name.
@@ -134,7 +141,7 @@ class Member {
          * @param member The Member to compare with.
          * @return 1 if this Member's name is last alphabetically, 0 otherwise.
          */
-        int operator>(Member& member);
+        int operator>(Member& member) const;
 
         /**
          * Operator overload to compare a Member's name with a string lexographically.
@@ -142,7 +149,7 @@ class Member {
          * @param s The string to compare with.
          * @return 1 if this Member's name is last alphabetically, 0 otherwise.
          */
-        int operator>(const std::string& s);
+        int operator>(const std::string& s) const;
 
         /**
          * Operator overload to compare two Members lexographically by name.

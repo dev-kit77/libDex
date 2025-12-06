@@ -30,15 +30,15 @@ Member::Member(const std::string& id, const std::string& name) {
     this->Loans = new std::list<Loan*>();
 }
 
-std::string Member::getID() {
+std::string Member::getID() const {
     return this->id;
 }
 
-std::string Member::getName() {
+std::string Member::getName() const {
     return this->name;
 }
 
-std::list<Loan*>* Member::getLoans() {
+std::list<Loan*>* Member::getLoans() const {
     return this->Loans;
 }
 
@@ -58,11 +58,11 @@ Loan* Member::getLoan(const std::string& publicationID) {
     return nullptr;
 }
 
-int Member::getLoanCount() {
+int Member::getLoanCount() const {
     return this->Loans->size();
 }
 
-int Member::hasPublication(const std::string& publicationID) {
+int Member::hasPublication(const std::string& publicationID) const {
     //loop for all Loans
     for (Loan* l : *this->Loans) {
         if (l->getPublication() != nullptr) {
@@ -93,6 +93,24 @@ int Member::addLoan(Publication* publication) {
 
         //add Loan to publication
         publication->addLoan(l);
+    }
+
+    //return status code
+    return ELEMENT_ADDED;
+}
+
+int Member::addLoan(Loan* loan) {
+    //check if Loan is already in list
+    if (this->hasPublication(loan->getPublication()->getID()) == ELEMENT_FOUND) {
+        //return status code
+        return ELEMENT_ALREADY_EXISTS;
+    }
+    else {
+        //add Loan to list
+        this->Loans->push_back(loan);
+
+        //add Loan to publication
+        loan->getPublication()->addLoan(loan);
     }
 
     //return status code
@@ -181,22 +199,22 @@ std::string Member::toString() const {
     return ss->str();
 }
 
-int Member::operator<(Member& member) {
+int Member::operator<(Member& member) const {
     //compare names
     return this->name.compare(member.name) < 0;
 }
 
-int Member::operator>(Member& member) {
+int Member::operator>(Member& member) const {
     //compare names
     return this->name.compare(member.name) > 0;
 }
 
-int Member::operator<(const std::string& s) {
+int Member::operator<(const std::string& s) const {
     //compare strings
     return this->name.compare(s) < 0;
 }
 
-int Member::operator>(const std::string& s) {
+int Member::operator>(const std::string& s) const {
     //compare strings
     return this->name.compare(s) > 0;
 }
@@ -220,7 +238,7 @@ std::istream& operator>>(std::istream& is, Member& member) {
 
     //loop until end of line
     while (is.peek() != '\n' && is.peek() != EOF) {
-        //skip past redundant data (now stored in reservations.txt)
+        //skip past redundant data (now stored in loans.txt)
         is.ignore();
     }
 
