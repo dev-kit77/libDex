@@ -14,8 +14,7 @@ class Journal : public Publication {
          * Constructor for Journal class
          * @param id unique identifier for the Journal
          * @param title title of the Journal
-         * @param author author of the Journal
-         * @param issue issue number of the Journal
+         * @param volume volume number of the Journal
          * @param publisher publisher of the Journal
          * @param location location of the Journal
          * @param year year of publication of the Journal
@@ -26,22 +25,10 @@ class Journal : public Publication {
         Journal(const std::string id, const std::string& title, const int volume, const std::string& publisher, const std::string& location, const int year, const int pageNo, const std::string& category, const int avalability);
 
         /**
-         * Getter for author class field
-         * @return author of the Journal, as string
-         */
-        std::string getAuthor() const;
-
-        /**
          * Getter for volume class field
          * @return volume of the Journal, as string
          */
         int getVolume() const;
-
-        /**
-         * Getter for page count class field
-         * @return page count of the Journal, as string
-         */
-        std::string getPageCount() const;
 
         /**
          * Getter for publisher class field
