@@ -77,7 +77,7 @@ int main() {
     interface::printMessage("Instantising new member class to test loan/Loan functionality:");
 
     //init new member
-    Member* m1 = new Member("M101", "John Doe");
+    Member* m1 = new Member("M101", "John");
 
     //print message
     interface::printMessage("Done!");
