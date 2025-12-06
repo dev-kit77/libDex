@@ -168,8 +168,15 @@ dataType* SortedList<dataType, searchType>::get(int i) {
         currNode = currNode->getNext();
     }
 
-    //return found node
-    return currNode->getPointer();
+    //check that node is not null before accessing
+    if (currNode != nullptr) {
+        //return node data pointer
+        return currNode->getPointer();
+    }
+    else {
+        //return null pointer
+        return nullptr;
+    }
 }
 
 template<class dataType, typename searchType>
