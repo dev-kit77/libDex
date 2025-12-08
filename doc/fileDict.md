@@ -27,4 +27,7 @@ movie
 ifTest.cpp: tester for the Interface library, Runs through input functions along with other display and menu functions.
 listTest.cpp: tester for the sortedList library. Initalises a sortedList with sample data of both simple and complex data types and tests its functionality.
 pubTest.cpp: tester for the Publication subclasses. Runs through subclasses testing all data types with respective sample data, along with loading and saving through the sortedList.
-membTest.cpp: tester for the Member class, initalises and tests member functions with sample data, along with the connections to publications.
+membtest.cpp: tester for the Member class, initalises and tests member functions with sample data, along with the connections to publications.
+libtest.cpp: tester for the library class, intialises a library then tests adding & removing, searching, borrowing and reserving and saving/loading.
+utiltest.cpp: tester for the Utility library, tests the levenshtien calculator and keyword extraction.
+scenario.cpp: implements a preset test scenario with reading specific data.
