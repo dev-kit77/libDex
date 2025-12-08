@@ -56,23 +56,23 @@ int util::levenshtein(const std::string& s1, const std::string& s2, int l1, int 
     return 1 + std::min(levenshtein(s1, s2, l1, l2 - 1), std::min(levenshtein(s1, s2, l1 - 1, l2), levenshtein(s1, s2, l1 - 1, l2- 1)));
 }
 
-std::list<std::string>* util::getKeywords(const std::string& keystring) {
+std::list<std::string*>* util::getKeywords(const std::string& keystring) {
     //get stringstream from keystring
     std::stringstream* keystream = new std::stringstream(keystring);
 
     //init keyword list
-    std::list<std::string>* keywords = new std::list<std::string>();
-
-    //init temp string
-    std::string t;
+    std::list<std::string*>* keywords = new std::list<std::string*>();
 
     //loop until searchstring is exausted
     while (keystream->good()) {
+        //init temp string
+        std::string* t = new std::string();
+
         //read in value
-        *keystream >> t;
+        *keystream >> *t;
 
         //remove any stray commas
-        t.erase(std::remove(t.begin(), t.end(), ','), t.end());
+        t->erase(std::remove(t->begin(), t->end(), ','), t->end());
 
         //add to search words
         keywords->push_back(t);

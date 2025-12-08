@@ -41,7 +41,7 @@ namespace util {
      * @param keystring the string to extract the keywords from
      * @return a list of keywords
      */
-    std::list<std::string>* getKeywords(const std::string& keystring);
+    std::list<std::string*>* getKeywords(const std::string& keystring);
 }
 
 #endif // UTIL_H
