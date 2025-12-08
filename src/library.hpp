@@ -91,7 +91,27 @@ T* Library::search(const std::string& searchTerm) const {
 }
 
 template<class T>
-T* Library::advancedSearch(const std::string keystring, std::string (T::*getter)() const) const {
+Publication* Library::findPublication(const std::string& id) const {
+    //store list for easy access
+    auto* l = this->getList(*new T);
+
+    //loop for all indexes
+    for (int i = 0; i < l->size(); i++) {
+        //get current index
+        T* found = l->get(i);
+
+        //check if node is search node
+        if (found->getID() == id) {
+            //return node
+            return found;
+        }
+    }
+
+    return nullptr;
+}
+
+template<class T>
+T* Library::advancedSearch(const std::string& keystring, std::string (T::*getter)() const) const {
     //store list for easy access
     auto* l = this->getList(*new T);
 

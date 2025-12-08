@@ -186,8 +186,22 @@ class Library {
         SortedList<Magazine, std::string>* magazines;
         SortedList<Movie, std::string>* movies;
 
+        /**
+         * Method to find a publication in the specifed types list.
+         * @param id the id to search for.
+         * @return the publication if found, nullptr otherwise.
+         */
         template<class T>
-        T* advancedSearch(const std::string keystring, std::string (T::*getter)() const) const;
+        Publication* findPublication(const std::string& id) const;
+
+        /**
+         * Method to advanced search the given list and provided function pointer value.
+         * @param keystring the string containing the keywords to search for.
+         * @param function pointer to the getter for the searched class field.
+         * @return closest match to the searchterm in selected field.
+         */
+        template<class T>
+        T* advancedSearch(const std::string& keystring, std::string (T::*getter)() const) const;
 
         /**
          * Method to save loans to file

@@ -353,22 +353,22 @@ Publication* Library::searchPublications(const std::string& title) const {
 Publication* Library::findPublication(const std::string id) const {
     switch (id[0]) {
         case 'A': case 'a':
-            return this->advancedAudioBookSearch(id);
+            return this->findPublication<AudioBook>(id);
             break;
         case 'B': case 'b':
-            return this->advancedBookSearch(id);
+            return this->findPublication<Book>(id);
             break;
         case 'E': case 'e':
-            return this->advancedEBookSearch(id);
+            return this->findPublication<EBook>(id);
             break;
         case 'J': case 'j':
-            return this->advancedJournalSearch(id);
+            return this->findPublication<Journal>(id);
             break;
         case 'M': case 'm':
-            return this->advancedMagazineSearch(id);
+            return this->findPublication<Magazine>(id);
             break;
         case 'V': case 'v':
-            return this->advancedMovieSearch(id);
+            return this->findPublication<Movie>(id);
             break;
         default:
             return nullptr;
