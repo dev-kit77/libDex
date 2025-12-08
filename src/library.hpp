@@ -208,7 +208,7 @@ int Library::writeLoans(SortedList<dataType, searchType>& p, std::ostream& os) {
         //loop for all loans
         for (Loan* l : *loans) {
             //output loan to filestream
-            os << l->getMember()->getID() << " " << l->getPublication()->getID() << " " << l->getActive() << " " << l->getDue();
+            os << l->getMember()->getID() << " " << l->getPublication()->getID() << " " << l->getActive() << " " << l->getDue() << std::endl;
 
             //check for writing errors
             if (os.fail() || os.bad()) {
