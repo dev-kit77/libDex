@@ -40,6 +40,24 @@
   },
 
   {
+    "label": "libDex: Debug Member Tests",
+    "command": "libdex: Compile Member Tests",
+    "program": "./bin/memberTests.out",
+    "request": "launch",
+    "adapter": "CodeLLDB",
+    "cwd": "$ZED_WORKTREE_ROOT"
+  },
+
+  {
+    "label": "libDex: Debug Scenario",
+    "command": "libdex: Compile Scenario",
+    "program": "./bin/scenario.out",
+    "request": "launch",
+    "adapter": "CodeLLDB",
+    "cwd": "$ZED_WORKTREE_ROOT"
+  },
+
+  {
     "label": "libDex: Debug Publication Tests",
     "command": "libdex: Compile Publication Tests",
     "program": "./bin/publicationTests.out",

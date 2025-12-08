@@ -105,6 +105,11 @@ class Member {
         int clearLoans();
 
         /**
+         * Method to get all penalties owed by the member
+         */
+        double getPenalties() const;
+
+        /**
          * Method to create a string representation of this Member object.
          *
          * @return A representation of this Member object, as string.

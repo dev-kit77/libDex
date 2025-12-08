@@ -152,13 +152,10 @@ int Member::returnLoan(Publication* publication) {
 int Member::clearLoans() {
     //loop for all Loans
     for (Loan* l : *this->Loans) {
-        //check if Loan is a Loan
-        if (typeid(*l) == typeid(Loan)) {
-            //check for penalty
-            if (((Loan*)l)->getPenalty() > 0) {
-                //return status code;
-                return PENALTY_DUE;
-            }
+        //check for penalties
+        if (l->getPenalty() > 0) {
+            //return status code;
+
         }
 
         if (l->getPublication() != nullptr) {
@@ -175,6 +172,20 @@ int Member::clearLoans() {
 
     //return status code
     return ELEMENT_DELETED;
+}
+
+double Member::getPenalties() const {
+    //init total
+    double total = 0;
+
+    //loop for all Loans
+    for (Loan* l : *this->Loans) {
+        //add penalty to total
+        total += l->getPenalty();
+    }
+
+    //return total
+    return total;
 }
 
 std::string Member::toString() const {
