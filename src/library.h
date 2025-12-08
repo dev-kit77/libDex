@@ -72,71 +72,70 @@ class Library {
          * @param keyword The keyword to search for.
          * @return A pointer to the publication if found, nullptr otherwise.
          */
-        auto* searchPublications(const std::string& keyword) const;
+        Publication* searchPublications(const std::string& title) const;
 
         /**
-         * Method to fuzzy wildcard search
+         * Method to find a publication in the library based on it's ID
+         * @param ID string containing the id of the publication
+         * @return A pointer to the publication if found, nullptr otherwise.
+         */
+        Publication* findPublication(const std::string id) const;
+
+        /**
+         * Method to fuzzy wildcard search Books
          * @param keyword The keystring to search through.
          * @param type The category to search through.
          * @return A pointer to the member if found, nullptr otherwise.
          */
-        Book* advancedBookSearch(const std::string& keystring, int type) const;
+        Book* advancedBookSearch(const std::string& keystring, int type = 1) const;
 
         /**
-         * Method to fuzzy wildcard search
+         * Method to fuzzy wildcard search AudioBooks
          * @param keyword The keyword to search for.
          * @param type The category to search through.
          * @return A pointer to the member if found, nullptr otherwise.
          */
-        AudioBook* advancedAudioBookSearch(const std::string& keystring, int type) const;
+        AudioBook* advancedAudioBookSearch(const std::string& keystring, int type = 1) const;
 
         /**
-         * Method to fuzzy wildcard search
+         * Method to fuzzy wildcard search eBooks
          * @param keyword The keyword to search for.
          * @param type The category to search through.
          * @return A pointer to the member if found, nullptr otherwise.
          */
-        EBook* advancedEBookSearch(const std::string& keystring, int type) const;
+        EBook* advancedEBookSearch(const std::string& keystring, int type = 1) const;
 
         /**
-         * Method to fuzzy wildcard search
+         * Method to fuzzy wildcard search Journal
          * @param keyword The keyword to search for.
          * @param type The category to search through.
          * @return A pointer to the member if found, nullptr otherwise.
          */
-        Journal* advancedJournalSearch(const std::string& keystring, int type) const;
+        Journal* advancedJournalSearch(const std::string& keystring, int type = 1) const;
 
         /**
-         * Method to fuzzy wildcard search
+         * Method to fuzzy wildcard search Magazines
          * @param keyword The keyword to search for.
          * @param type The category to search through.
          * @return A pointer to the member if found, nullptr otherwise.
          */
-        Magazine* advancedMagazineSearch(const std::string& keystring, int type) const;
+        Magazine* advancedMagazineSearch(const std::string& keystring, int type = 1) const;
 
         /**
-         * Method to fuzzy wildcard search
+         * Method to fuzzy wildcard search Movies
          * @param keyword The keyword to search for.
          * @param type The category to search through.
          * @return A pointer to the member if found, nullptr otherwise.
          */
-        Movie* advancedMovieSearch(const std::string& keystring, int type) const;
+        Movie* advancedMovieSearch(const std::string& keystring, int type = 1) const;
 
         /**
-         * Method to fuzzy wildcard search
+         * Method to fuzzy wildcard search members
          * @param keyword The keyword to search for.
          * @param type The category to search through.
          * @return A pointer to the member if found, nullptr otherwise.
          */
-        Member* advancedMemberSearch(const std::string& keystring, int type) const;
-
-        /**
-         * Method to fuzzy wildcard search all publications
-         * @param keyword The keyword to search for.
-         * @param type The category to search through.
-         * @return A pointer to the book if found, nullptr otherwise.
-         */
-        auto* keywordSearch(const std::string& keyword) const;
+        Member* memberSearch(const std::string& keystring, int type = 1) const;
 
         /**
          * Method to load the library from a directory
@@ -207,15 +206,15 @@ class Library {
 
         /**
          * Method to load loans from file and link between publication and members
-         * @param filename the file to read the list from
+         * @param dirname the driectory of files to read the list from
          * @return the status code of the read
          */
-        int linkLoans(const std::string& filename);
+        int linkLoans(const std::string& dirname);
 
         /**
          * Method to read a loan from a specified file.
          * @param input stream to read from
-         * @return pointer to new loan object
+         * @return pointer to new loan object, or nullptr upon error
          */
         Loan* readLoan(std::istream& is);
 
