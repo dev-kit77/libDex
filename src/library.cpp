@@ -173,13 +173,8 @@ int Library::linkLoans(const std::string& dirname) {
     //open file input stream
     std::ifstream file(filename);
 
-    //check if file is open
-    if (!file.is_open()) {
-        return FILE_NOT_FOUND;
-    }
-
-    //check if file is blank
-    if (file.peek() == EOF) {
+    //check if file is blank or not open
+    if (file.peek() == EOF || !file.is_open()) {
         //close file
         file.close();
 
@@ -230,6 +225,11 @@ int Library::linkLoans(const std::string& dirname) {
                         l->getMember()->addLoan(l);
                     }
                 }
+            }
+
+            //move stream to next line or end of file
+            if (file.peek() == '\n') {
+                file.ignore();
             }
         }
 
