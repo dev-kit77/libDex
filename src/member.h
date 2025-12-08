@@ -55,14 +55,6 @@ class Member {
         Loan* getLoan(const std::string& publicationID);
 
         /**
-         * Method to loan out a publication that has been reserved.
-         *
-         * @param r The Loan object to replace the reservation with.
-         * @return The result of the loan operation, as integer.
-         */
-        int LoanOut(Loan* r);
-
-        /**
          * Getter for Member Loans.
          *
          * @return The Member's Loans, as list of strings.

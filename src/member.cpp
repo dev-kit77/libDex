@@ -85,14 +85,11 @@ int Member::addLoan(Publication* publication) {
         return ELEMENT_ALREADY_EXISTS;
     }
     else {
-        //instatise new Loan object
-        Loan* l = new Loan(this, publication);
-
         //add Loan to list
-        this->Loans->push_back(l);
+        this->Loans->push_back(new Loan(this, publication));
 
         //add Loan to publication
-        publication->addLoan(l);
+        publication->addLoan(this->Loans->back());
     }
 
     //return status code
