@@ -231,6 +231,39 @@ inline dataType* SortedList<dataType, searchType>::find(const searchType& search
 }
 
 template<class dataType, typename searchType>
+inline dataType* SortedList<dataType, searchType>::findNearest(const searchType& searchTerm) {
+    //init min, max & mid
+	int min = 0;
+	int max = (this->size() - 1);
+	int mid;
+
+	//loop until list is empty
+	while (min <= max) {
+		//get mid value
+		mid = min + ((max - min)/2);
+
+		dataType* m = this->get(mid);
+
+		//trim left
+		if (*m < searchTerm) {
+			min = mid + 1;
+		}
+		//trim right
+		else if (*m > searchTerm) {
+			max = mid - 1;
+		}
+		//if match found
+		else {
+			//match found
+			return m;
+		}
+	}
+
+	//return closest found value if direct match is not found
+	return this->get(mid);
+}
+
+template<class dataType, typename searchType>
 inline std::string SortedList<dataType, searchType>::toString() {
     //init string stream
     std::ostringstream* ss = new std::ostringstream();
@@ -310,9 +343,6 @@ inline int SortedList<dataType, searchType>::load(const std::string& filename) {
             else {
                 //delete invalid data
                 delete data;
-
-                //print error message
-                std::cerr << "Error reading data from file: " << filename << ". Node Discarded." << std::endl;
 
                 //return status code
                 return FILE_PARTIALLY_READ;

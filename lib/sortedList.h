@@ -116,6 +116,18 @@ class SortedList {
         dataType* find(const searchType& searchTerm);
 
         /**
+        * Method to perform a binary search on the list.
+        *
+        * This method performs a binary search on the list to find a value.
+        * If the value is found, its index is returned.
+        * If the value is not found, NULL is returned.
+        *
+        * @param searchTerm The value to be searched for.
+        * @return the value if found, nearest value otherwise.
+        */
+        dataType* findNearest(const searchType& searchTerm);
+
+        /**
          * Method to get an element at a specific index.
          *
          * If the index is out of bounds, nullptr is returned.
