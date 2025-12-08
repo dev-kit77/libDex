@@ -18,8 +18,8 @@ int main() {
     interface::separator();
 
     //print message
-    interface::printMessage("Levenshtein Algorithm Test 'kitten' & 'sitting':");
-    std::cout << std::to_string(util::levenshtein("kitten", "sitting", 6, 7)) << std::endl;
+    interface::printMessage("Levenshtein Algorithm Test 'mitten' & 'betting':");
+    std::cout << std::to_string(util::levenshtein("mitten", "betting", 6, 7)) << std::endl;
 
     //newline
     interface::newLine();
@@ -27,8 +27,8 @@ int main() {
     //print message
     interface::printMessage("Testing keyword extraction from string:");
     interface::printMessage("Testing, Rockets bites KFC hungry,");
-    for (std::string w : *util::getKeywords("Testing, Rockets bites KFC hungry,")) {
-        std::cout << w << std::endl;
+    for (std::string* w : *util::getKeywords("Testing, Rockets bites KFC hungry,")) {
+        std::cout << *w << std::endl;
     }
 
     //exit program
